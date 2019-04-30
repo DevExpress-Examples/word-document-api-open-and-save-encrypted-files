@@ -21,8 +21,8 @@ Namespace word_processing_encryption
 			server.Options.Import.EncryptionPassword = "test"
 			server.LoadDocument("Documents//testEncrypted.docx")
 
-			Dim encryptionOptions As New EncryptionOptions()
-			encryptionOptions.Type = EncryptionType.Strong
+            Dim encryptionOptions As New EncryptionSettings()
+            encryptionOptions.Type = EncryptionType.Strong
 			encryptionOptions.Password = "12345"
 
 			Console.WriteLine("Select the file format: DOCX/DOC")

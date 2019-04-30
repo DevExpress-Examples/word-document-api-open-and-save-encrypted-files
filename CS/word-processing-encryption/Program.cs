@@ -24,7 +24,7 @@ namespace word_processing_encryption
             server.Options.Import.EncryptionPassword = "test";
             server.LoadDocument("Documents//testEncrypted.docx");
 
-            EncryptionOptions encryptionOptions = new EncryptionOptions();
+            EncryptionSettings encryptionOptions = new EncryptionSettings();
             encryptionOptions.Type = EncryptionType.Strong;
             encryptionOptions.Password = "12345";
 
