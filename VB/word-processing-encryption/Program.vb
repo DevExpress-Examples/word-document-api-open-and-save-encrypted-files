@@ -16,13 +16,13 @@ Namespace word_processing_encryption
 			Dim server As New RichEditDocumentServer()
 			AddHandler server.EncryptedFilePasswordRequested, AddressOf Server_EncryptedFilePasswordRequested
 			AddHandler server.EncryptedFilePasswordCheckFailed, AddressOf Server_EncryptedFilePasswordCheckFailed
-			AddHandler server.InvalidFormatException, AddressOf Server_InvalidFormatException
+			AddHandler server.DecryptionFailed, AddressOf Server_DecryptionFailed
 
 			server.Options.Import.EncryptionPassword = "test"
 			server.LoadDocument("Documents//testEncrypted.docx")
 
-            Dim encryptionOptions As New EncryptionSettings()
-            encryptionOptions.Type = EncryptionType.Strong
+			Dim encryptionOptions As New EncryptionSettings()
+			encryptionOptions.Type = EncryptionType.Strong
 			encryptionOptions.Password = "12345"
 
 			Console.WriteLine("Select the file format: DOCX/DOC")
@@ -45,17 +45,17 @@ Namespace word_processing_encryption
 				server.LoadDocument(fileName)
 			End If
 			If IsValid = True Then
+
 				server.SaveDocument(fileName, documentFormat)
-			End If
 				Process.Start(fileName)
+			End If
 		End Sub
 
-
-		Private Shared Sub Server_InvalidFormatException(ByVal sender As Object, ByVal e As RichEditInvalidFormatExceptionEventArgs)
-			Dim server As RichEditDocumentServer = DirectCast(sender, RichEditDocumentServer)
-			server.SaveDocument("EmptyFile.docx", DocumentFormat.OpenXml)
-			Process.Start("EmptyFile.docx")
+		Private Shared Sub Server_DecryptionFailed(ByVal sender As Object, ByVal e As DecryptionFailedEventArgs)
+			Console.WriteLine(e.Exception.Message.ToString() & " Press any key to close...")
+			Console.ReadKey(True)
 		End Sub
+
 
 		Private Shared Sub Server_EncryptedFilePasswordCheckFailed(ByVal sender As Object, ByVal e As EncryptedFilePasswordCheckFailedEventArgs)
 			Select Case e.Error
@@ -71,7 +71,7 @@ Namespace word_processing_encryption
 						e.Handled = True
 
 					Else
-						Console.WriteLine("Password check failed. Loading an empty file...")
+						IsValid = False
 					End If
 			End Select
 

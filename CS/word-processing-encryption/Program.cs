@@ -19,7 +19,7 @@ namespace word_processing_encryption
             RichEditDocumentServer server = new RichEditDocumentServer();
             server.EncryptedFilePasswordRequested += Server_EncryptedFilePasswordRequested;
             server.EncryptedFilePasswordCheckFailed += Server_EncryptedFilePasswordCheckFailed;
-            server.InvalidFormatException += Server_InvalidFormatException;
+            server.DecryptionFailed += Server_DecryptionFailed;
 
             server.Options.Import.EncryptionPassword = "test";
             server.LoadDocument("Documents//testEncrypted.docx");
@@ -48,17 +48,19 @@ namespace word_processing_encryption
                 server.LoadDocument(fileName);
             }
             if (IsValid == true)
+            {              
+
                 server.SaveDocument(fileName, documentFormat);
                 Process.Start(fileName);
+            }
         }
 
-
-        private static void Server_InvalidFormatException(object sender, RichEditInvalidFormatExceptionEventArgs e)
+        private static void Server_DecryptionFailed(object sender, DecryptionFailedEventArgs e)
         {
-            RichEditDocumentServer server = (RichEditDocumentServer)sender;
-            server.SaveDocument("EmptyFile.docx", DocumentFormat.OpenXml);
-            Process.Start("EmptyFile.docx");
+            Console.WriteLine(e.Exception.Message.ToString()+" Press any key to close...");
+            Console.ReadKey(true);
         }
+
 
         private static void Server_EncryptedFilePasswordCheckFailed(object sender, EncryptedFilePasswordCheckFailedEventArgs e)
         {
@@ -80,7 +82,7 @@ namespace word_processing_encryption
 
                     else
                     {
-                        Console.WriteLine("Password check failed. Loading an empty file...");
+                        IsValid = false;
                     }
                     break;
             }
