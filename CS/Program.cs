@@ -13,7 +13,6 @@ namespace word_processing_encryption
     {
         static bool IsValid { get; set; }
 
-
         static void Main(string[] args)
         {
             RichEditDocumentServer server = new RichEditDocumentServer();
@@ -26,7 +25,7 @@ namespace word_processing_encryption
 
             EncryptionSettings encryptionOptions = new EncryptionSettings();
             encryptionOptions.Type = EncryptionType.Strong;
-            encryptionOptions.Password = "12345";
+            encryptionOptions.Password = "";
 
             Console.WriteLine("Select the file format: DOCX/DOC");
             string answerFormat = Console.ReadLine()?.ToLower();
@@ -51,7 +50,12 @@ namespace word_processing_encryption
             {              
 
                 server.SaveDocument(fileName, documentFormat);
-                Process.Start(fileName);
+                var p = new Process();
+                p.StartInfo = new ProcessStartInfo(fileName)
+                {
+                    UseShellExecute = true
+                };
+                p.Start();
             }
         }
 

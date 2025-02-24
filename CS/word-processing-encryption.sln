@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "word-processing-encryption", "word-processing-encryption\word-processing-encryption.csproj", "{2C2139A4-3B0D-411F-8FA5-CC317AB8C22F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "word-processing-encryption", "word-processing-encryption.csproj", "{2C2139A4-3B0D-411F-8FA5-CC317AB8C22F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -39,7 +39,9 @@ Namespace word_processing_encryption
 
             If IsValid = True Then
                 server.SaveDocument(fileName, documentFormat)
-                Call Process.Start(fileName)
+                Dim p As New Process()
+                p.StartInfo = New ProcessStartInfo(fileName) With {.UseShellExecute = True}
+                p.Start()
             End If
         End Sub
 

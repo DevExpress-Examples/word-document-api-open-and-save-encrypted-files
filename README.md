@@ -14,7 +14,7 @@ The following sample project shows how to use a Word Processing File API to load
 
 ## Files to Review
 
-* [Program.cs](./CS/word-processing-encryption/Program.cs) (VB: [Program.vb](./VB/word-processing-encryption/Program.vb))
+* [Program.cs](./CS/Program.cs) (VB: [Program.vb](./VB/Program.vb))
 
 ## Documentation
 
