@@ -1,4 +1,6 @@
-Imports System
+Imports System.Linq
+Imports System.Text
+Imports System.Threading.Tasks
 Imports DevExpress.XtraRichEdit
 Imports DevExpress.XtraRichEdit.API.Native
 Imports System.Diagnostics
@@ -11,14 +13,14 @@ Namespace word_processing_encryption
 
         Shared Sub Main(ByVal args As String())
             Dim server As RichEditDocumentServer = New RichEditDocumentServer()
-            AddHandler server.EncryptedFilePasswordRequested, AddressOf Server_EncryptedFilePasswordRequested
-            AddHandler server.EncryptedFilePasswordCheckFailed, AddressOf Server_EncryptedFilePasswordCheckFailed
-            AddHandler server.DecryptionFailed, AddressOf Server_DecryptionFailed
+            server.EncryptedFilePasswordRequested += AddressOf Server_EncryptedFilePasswordRequested
+            server.EncryptedFilePasswordCheckFailed += AddressOf Server_EncryptedFilePasswordCheckFailed
+            server.DecryptionFailed += AddressOf Server_DecryptionFailed
             server.Options.Import.EncryptionPassword = "test"
             server.LoadDocument("Documents//testEncrypted.docx")
             Dim encryptionOptions As EncryptionSettings = New EncryptionSettings()
             encryptionOptions.Type = EncryptionType.Strong
-            encryptionOptions.Password = "12345"
+            encryptionOptions.Password = ""
             Console.WriteLine("Select the file format: DOCX/DOC")
             Dim answerFormat As String = Console.ReadLine()?.ToLower()
             Dim documentFormat As DocumentFormat
@@ -28,7 +30,7 @@ Namespace word_processing_encryption
                 documentFormat = DocumentFormat.Doc
             End If
 
-            Dim fileName As String = String.Format("EncryptedwithNewPassword.{0}", answerFormat)
+            Dim fileName As String = [String].Format("EncryptedwithNewPassword.{0}", answerFormat)
             server.SaveDocument(fileName, documentFormat, encryptionOptions)
             Console.WriteLine("The document is saved with new password. Continue? (y/n)")
             Dim answer As String = Console.ReadLine()?.ToLower()
@@ -37,9 +39,9 @@ Namespace word_processing_encryption
                 server.LoadDocument(fileName)
             End If
 
-            If IsValid = True Then
+            If IsValid Is True Then
                 server.SaveDocument(fileName, documentFormat)
-                Dim p As New Process()
+                Dim p = New Process()
                 p.StartInfo = New ProcessStartInfo(fileName) With {.UseShellExecute = True}
                 p.Start()
             End If
