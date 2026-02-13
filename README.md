@@ -14,7 +14,7 @@
 
 The following sample project shows how to use a Word Processing File API to load and save password-encrypted files. The loaded file is decrypted using the EncryptionSettings properties. When a user re-opens the file with a new password, the [RichEditDocumentServer.EncryptedFilePasswordRequested](https://docs.devexpress.com/OfficeFileAPI/DevExpress.XtraRichEdit.RichEditDocumentServer.EncryptedFilePasswordRequested?v=19.1) and [RichEditDocumentServer.EncryptedFilePasswordCheckFailed](https://docs.devexpress.com/OfficeFileAPI/DevExpress.XtraRichEdit.RichEditDocumentServer.EncryptedFilePasswordCheckFailed?v=19.1) events occur. If the user cancels the operation or exceeds the number of attempts to enter the password, [RichEditDocumentServer](https://docs.devexpress.com/OfficeFileAPI/DevExpress.XtraRichEdit.RichEditDocumentServer?v=19.1) loads an empty file.
 <!-- feedback -->
-## Does this example address your development requirements/objectives?
+## Does This Example Address Your Development Requirements/Objectives?
 
 [<img src="https://www.devexpress.com/support/examples/i/yes-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=word-document-api-open-and-save-encrypted-files&~~~was_helpful=yes) [<img src="https://www.devexpress.com/support/examples/i/no-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=word-document-api-open-and-save-encrypted-files&~~~was_helpful=no)
 
